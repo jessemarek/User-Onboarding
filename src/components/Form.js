@@ -23,6 +23,7 @@ const Form = props =>{
                     onChange={onInputChange}
                     value={values.name} 
                 />
+                {errors.name.length > 3 ? (<p className="error">{errors.name}</p>) : null}
             </label>
 
             <label htmlFor="email">
@@ -34,6 +35,7 @@ const Form = props =>{
                     onChange={onInputChange} 
                     value={values.email} 
                 />
+                {errors.email.length > 0 ? (<p className="error">{errors.email}</p>) : null}
             </label>
 
             <label htmlFor="password">
@@ -45,6 +47,7 @@ const Form = props =>{
                     onChange={onInputChange} 
                     value={values.password} 
                 />
+                {errors.password.length > 8 ? (<p className="error">{errors.password}</p>) : null}
             </label>
 
             <label htmlFor="terms">
@@ -55,6 +58,7 @@ const Form = props =>{
                     onChange={onCheckboxChange}
                     checked={values.terms}
                 /> Agree to Terms of Service
+                {errors.terms ? (<p className="error">{errors.terms}</p>) : null}
             </label>
 
             <button type="submit" disabled={disabled}>Submit</button>

@@ -8,11 +8,14 @@ import Form from './components/Form'
 //Import Styles
 import './App.css';
 
+//Base URL endpoint
+const baseURL = 'https://reqres.in/api/users_'
+
 //Initial values for the new user form
 const initFormValues = {
   name: '',
   email: '',
-  paswword: '',
+  password: '',
   terms: false,
 }
 
@@ -48,13 +51,23 @@ const formSchema = yup.object().shape({
 
 function App() {
 
-  //States
+  /**************************** States ****************************/
+
+  //Holds all the users data
+  const [userList, setUserList] = useState([])
+
+  //Holds values for the from inputs
   const [formValues, setFormValues] = useState(initFormValues)
+
+  //Holds the error messages for Form validation
   const [formErrors, setFormErrors] = useState(initFormErrors)
   
+  //Disable the Submit button if the form isn't filled in correctly
   const [submitDisabled, setSubmitDisabled] = useState(true)
 
-  //Callbacks
+  /**************************** Callbacks  ****************************/
+  
+  //Check form validation when the input fields change
   const onInputChange = e =>{
     const name = e.target.name
     const value = e.target.value
@@ -80,6 +93,7 @@ function App() {
     })
   }
 
+  //Check form validation when the checkbox changes
   const onCheckboxChange = e =>{
     const name = e.target.name
     const isChecked = e.target.checked
@@ -116,10 +130,28 @@ function App() {
 
   }, [formValues])
 
+  const postUsers = (data) =>{
+    axios
+      .post(baseURL, data)
+      .then(res =>{
+        const addUser = res.data
+        setUserList([
+          ...userList, addUser
+        ])
+      })
+      .catch(err =>{
+        console.log('ERROR: ', err)
+      })
+  }
+
+
+  //Submit the filled out form
   const onSubmit = e =>{
     //Prevent page reload
     e.preventDefault()
 
+    //Send a post to the server adding the values from the form
+    postUsers(formValues)
 
     //Reset the Form inputs
     setFormValues(initFormValues)
@@ -139,6 +171,14 @@ function App() {
         errors={formErrors}
         
       />
+
+      <div className="container">
+        <h3>User List:</h3>
+        <pre>
+          {JSON.stringify(userList, null, 1)}
+        </pre>
+      </div>
+      
 
     </div>
   );
