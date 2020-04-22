@@ -13,9 +13,7 @@ body {
   padding: 16px;
   background-color: #fff;
 }
-a {
-  font-size: 0.75em;
-}
+
 header {
   display: flex;
   flex-direction: row-reverse;

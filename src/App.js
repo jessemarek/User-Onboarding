@@ -8,6 +8,8 @@ import Form from './components/Form'
 //Import Styles
 import './App.css';
 
+
+
 //Base URL endpoint
 const baseURL = 'https://reqres.in/api/users_'
 
@@ -20,6 +22,7 @@ const initFormValues = {
   terms: false,
 }
 
+//Initial Form validation error state
 const initFormErrors = {
   name: '',
   email: '',
@@ -28,7 +31,7 @@ const initFormErrors = {
   terms: '',
 }
 
-//Yup validation
+  /************************ Validation Format ************************/
 const formSchema = yup.object().shape({
   name:
     yup
@@ -48,7 +51,7 @@ const formSchema = yup.object().shape({
   role:
     yup
       .string()
-      .matches(/front|back|data|ops/, 'Select a valid role')
+      .matches(/front|back|data|ops|full/, 'Select a valid role')
       .required('You must select a role'),
   terms:
     yup
@@ -58,7 +61,7 @@ const formSchema = yup.object().shape({
 
 function App() {
 
-  /**************************** States ****************************/
+  /****************************** States ******************************/
 
   //Holds all the users data
   const [userList, setUserList] = useState([])
@@ -137,6 +140,7 @@ function App() {
 
   }, [formValues])
 
+  //POST data to server using axios
   const postUsers = (data) =>{
     axios
       .post(baseURL, data)
