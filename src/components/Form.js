@@ -2,13 +2,12 @@ import React from 'react'
 
 const Form = props =>{
     const {
-        name,
-        email,
-        password,
-        terms,
+        values,
         onInputChange,
-        onSubmit
-
+        onCheckboxChange,
+        onSubmit,
+        disabled,
+        errors
     } = props
 
     return(
@@ -22,7 +21,7 @@ const Form = props =>{
                     name="name" 
                     type="text" 
                     onChange={onInputChange}
-                    value={name} 
+                    value={values.name} 
                 />
             </label>
 
@@ -33,7 +32,7 @@ const Form = props =>{
                     name="email" 
                     type="email"
                     onChange={onInputChange} 
-                    value={email} 
+                    value={values.email} 
                 />
             </label>
 
@@ -44,21 +43,21 @@ const Form = props =>{
                     name="password" 
                     type="password"
                     onChange={onInputChange} 
-                    value={password} 
+                    value={values.password} 
                 />
             </label>
 
-            <label htmlFor="ToS">
+            <label htmlFor="terms">
                 <input 
-                    id="ToS" 
+                    id="terms" 
                     name="terms" 
                     type="checkbox"
-                    onChange={onInputChange}
-                    checked={terms} 
+                    onChange={onCheckboxChange}
+                    checked={values.terms}
                 /> Agree to Terms of Service
             </label>
 
-            <button type="submit">Submit</button>
+            <button type="submit" disabled={disabled}>Submit</button>
 
         </form>
     )
