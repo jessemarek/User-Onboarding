@@ -16,6 +16,7 @@ const initFormValues = {
   name: '',
   email: '',
   password: '',
+  role: '',
   terms: false,
 }
 
@@ -23,6 +24,7 @@ const initFormErrors = {
   name: '',
   email: '',
   password: '',
+  role: '',
   terms: '',
 }
 
@@ -43,6 +45,11 @@ const formSchema = yup.object().shape({
       .string()
       .min(8, 'Your password must be at least 8 characters long')
       .required('You must enter a password'),
+  role:
+    yup
+      .string()
+      .matches(/front|back|data|ops/, 'Select a valid role')
+      .required('You must select a role'),
   terms:
     yup
       .boolean()

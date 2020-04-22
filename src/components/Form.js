@@ -50,6 +50,23 @@ const Form = props =>{
                 {errors.password.length > 8 ? (<p className="error">{errors.password}</p>) : null}
             </label>
 
+            <label htmlFor="role">
+                Role<br></br>
+                <select 
+                    id="role" 
+                    name="role" 
+                    onChange={onInputChange}
+                    value={values.role}
+                >
+                    <option value="">-- Select a Role --</option>
+                    <option value="front">Front End Dev</option>
+                    <option value="back">Back End Dev</option>
+                    <option value="data">Data Science</option>
+                    <option value="ops">Dev Ops</option>
+                </select>
+                {errors.role.length > 0 ? (<p className="error">{errors.role}</p>) : null}
+            </label>
+
             <label htmlFor="terms">
                 <input 
                     id="terms" 
